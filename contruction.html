@@ -1,0 +1,990 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Civil & Finishing Products - DPCS</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #1a365d;
+            --secondary-color: #2b77ad;
+            --accent-color: #ffd700;
+            --text-dark: #2d3748;
+            --text-light: #718096;
+            --bg-light: #f7fafc;
+            --white: #ffffff;
+            --shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            --gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            overflow-x: hidden;
+        }
+
+        /* Header Styles */
+        .header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-link:hover {
+            color: var(--secondary-color);
+        }
+
+        .nav-link.active {
+            color: var(--secondary-color);
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent-color);
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after,
+        .nav-link.active::after {
+            width: 100%;
+        }
+
+        .mobile-menu {
+            display: none;
+            cursor: pointer;
+            font-size: 1.5rem;
+            color: var(--primary-color);
+        }
+
+        /* Page Header */
+        .page-header {
+            padding: 8rem 0 4rem 0;
+            background: linear-gradient(135deg, rgba(26, 54, 93, 0.9), rgba(43, 119, 173, 0.8)),
+                url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600"><rect fill="%23f0f0f0" width="1200" height="600"/><g fill="%23ddd"><rect x="100" y="100" width="80" height="80"/><rect x="300" y="200" width="60" height="60"/><rect x="800" y="150" width="70" height="70"/></g></svg>');
+            background-size: cover;
+            text-align: center;
+            color: var(--white);
+        }
+
+        .page-header h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .page-header p {
+            font-size: 1.3rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .breadcrumb {
+            margin-top: 2rem;
+            opacity: 0.8;
+        }
+
+        .breadcrumb a {
+            color: var(--white);
+            text-decoration: none;
+            margin: 0 0.5rem;
+        }
+
+        .breadcrumb a:hover {
+            color: var(--accent-color);
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Products Section */
+        .products-section {
+            padding: 5rem 0;
+            background: var(--bg-light);
+        }
+
+        .section-intro {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-intro h2 {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .section-intro p {
+            font-size: 1.2rem;
+            color: var(--text-light);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .product-card {
+            background: var(--white);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+        }
+
+        .product-image {
+            height: 200px;
+            background: var(--gradient);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .product-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, rgba(255, 255, 255, 0.1) 25%, transparent 25%, transparent 75%, rgba(255, 255, 255, 0.1) 75%);
+            background-size: 20px 20px;
+        }
+
+        .product-icon {
+            font-size: 4rem;
+            color: var(--white);
+            z-index: 2;
+            position: relative;
+        }
+
+        .product-content {
+            padding: 2rem;
+        }
+
+        .product-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .product-description {
+            color: var(--text-light);
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .product-features {
+            list-style: none;
+            margin-bottom: 2rem;
+        }
+
+        .product-features li {
+            padding: 0.5rem 0;
+            position: relative;
+            padding-left: 1.5rem;
+            color: var(--text-light);
+        }
+
+        .product-features li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--accent-color);
+            font-weight: 600;
+        }
+
+        .inquiry-btn {
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            background: var(--primary-color);
+            color: var(--white);
+            text-decoration: none;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .inquiry-btn:hover {
+            background: var(--secondary-color);
+            transform: translateX(5px);
+        }
+
+        /* Category Sections */
+        .category-section {
+            margin-bottom: 4rem;
+        }
+
+        .category-title {
+            font-size: 2rem;
+            color: var(--primary-color);
+            margin-bottom: 2rem;
+            text-align: center;
+            position: relative;
+        }
+
+        .category-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background: var(--accent-color);
+        }
+
+        /* CTA Section */
+        .cta-section {
+            padding: 4rem 0;
+            background: var(--gradient);
+            text-align: center;
+            color: var(--white);
+        }
+
+        .cta-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .cta-section p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background: var(--accent-color);
+            color: var(--primary-color);
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(255, 215, 0, 0.3);
+        }
+
+
+        /* Contact Information Section */
+        .contact-info-section {
+            padding: 5rem 0;
+            background: var(--white);
+        }
+
+        .contact-info-section h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .contact-info-section>.container>p {
+            text-align: center;
+            font-size: 1.2rem;
+            color: var(--text-light);
+            margin-bottom: 3rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .contact-card {
+            background: var(--bg-light);
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow);
+        }
+
+        .contact-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .contact-icon {
+            width: 60px;
+            height: 60px;
+            background: var(--primary-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem auto;
+            transition: all 0.3s ease;
+        }
+
+        .contact-card:hover .contact-icon {
+            background: var(--secondary-color);
+            transform: scale(1.1);
+        }
+
+        .contact-icon i {
+            font-size: 1.5rem;
+            color: var(--white);
+        }
+
+        .contact-card h3 {
+            font-size: 1.3rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .contact-card p {
+            color: var(--text-light);
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .contact-note {
+            background: var(--bg-light);
+            padding: 2rem;
+            border-radius: 10px;
+            text-align: center;
+            border-left: 4px solid var(--accent-color);
+        }
+
+        .contact-note p {
+            color: var(--text-light);
+            margin-bottom: 0.5rem;
+        }
+
+        .contact-note p:last-child {
+            margin-bottom: 0;
+        }
+
+        .contact-note strong {
+            color: var(--primary-color);
+        }
+
+        .cta-section {
+            padding: 4rem 0;
+            background: var(--gradient);
+            text-align: center;
+            color: var(--white);
+        }
+
+        .cta-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .cta-section p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background: var(--accent-color);
+            color: var(--primary-color);
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(255, 215, 0, 0.3);
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--primary-color);
+            color: var(--white);
+            text-align: center;
+            padding: 2rem 0;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .mobile-menu {
+                display: block;
+            }
+
+            .nav-menu {
+                display: none;
+            }
+
+            .page-header h1 {
+                font-size: 2.5rem;
+            }
+
+            .products-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav-container">
+            <a href="#" class="logo">DPCS</a>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <!-- <li><a href="about.html" class="nav-link">About</a></li> -->
+                <li><a href="contruction.html" class="nav-link">Civil & Finishing</a></li>
+                <li><a href="mep.html" class="nav-link">MEP</a></li>
+                <li><a href="infrastructure.html" class="nav-link">Infrastructure</a></li>
+                <!-- <li><a href="contact.html" class="nav-link">Contact</a></li> -->
+            </ul>
+            <div class="mobile-menu">
+                <i class="fas fa-bars"></i>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container" data-aos="fade-up">
+            <h1>Civil & Finishing Products</h1>
+            <p>Complete range of premium civil and finishing materials for your construction projects</p>
+            <div class="breadcrumb">
+                <a href="index.html">Home</a> / <span>Civil & Finishing Products</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section class="products-section">
+        <div class="container">
+            <div class="section-intro" data-aos="fade-up">
+                <h2>Our Civil & Finishing Product Line</h2>
+                <p>We provide a comprehensive range of civil and finishing materials from prestigious European and Asian
+                    manufacturers, ensuring quality and reliability for every project.</p>
+            </div>
+
+            <!-- Flooring & Access Systems -->
+            <div class="category-section">
+                <h3 class="category-title" data-aos="fade-up">Flooring & Access Systems</h3>
+                <div class="products-grid">
+                    <div class="product-card" data-aos="fade-up" data-aos-delay="100">
+                        <div class="product-image">
+                            <i class="fas fa-expand-arrows-alt product-icon"></i>
+                        </div>
+                        <div class="product-content">
+                            <h4 class="product-title">Expansion Joints</h4>
+                            <p class="product-description">High-quality expansion joints for buildings and
+                                infrastructure, designed to accommodate structural movement and thermal expansion.</p>
+                            <ul class="product-features">
+                                <li>Weather resistant materials</li>
+                                <li>Multiple profile options</li>
+                                <li>Easy installation</li>
+                                <li>Long-lasting durability</li>
+                            </ul>
+                            <!-- <a href="contact.html" class="inquiry-btn">Request Quote</a> -->
+                        </div>
+                    </div>
+
+                    <div class="product-card" data-aos="fade-up" data-aos-delay="200">
+                        <div class="product-image">
+                            <i class="fas fa-door-open product-icon"></i>
+                        </div>
+                        <div class="product-content">
+                            <h4 class="product-title">Access Hatches & Panels</h4>
+                            <p class="product-description">Durable access hatches and panels for ceiling, floor, and
+                                wall applications providing easy maintenance access.</p>
+                            <ul class="product-features">
+                                <li>Fire-rated options available</li>
+                                <li>Various sizes and finishes</li>
+                                <li>Security locking mechanisms</li>
+                                <li>Architectural integration</li>
+                            </ul>
+                            <!-- <a href="contact.html" class="inquiry-btn">Request Quote</a> -->
+                        </div>
+                    </div>
+
+                    <div class="product-card" data-aos="fade-up" data-aos-delay="300">
+                        <div class="product-image">
+                            <i class="fas fa-layer-group product-icon"></i>
+                        </div>
+                        <div class="product-content">
+                            <h4 class="product-title">Raised Access Floor</h4>
+                            <p class="product-description">Professional raised access flooring systems for data centers,
+                                offices, and commercial buildings.</p>
+                            <ul class="product-features">
+                                <li>Cable management solutions</li>
+                                <li>Various load capacities</li>
+                                <li>Anti-static properties</li>
+                                <li>Modular design</li>
+                            </ul>
+                            <!-- <a href="contact.html" class="inquiry-btn">Request Quote</a> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Flooring Materials -->
+            <div class="category-section">
+                <h3 class="category-title" data-aos="fade-up">Flooring Materials</h3>
+                <div class="products-grid">
+                    <div class="product-card" data-aos="fade-up" data-aos-delay="100">
+                        <div class="product-image">
+                            <i class="fas fa-th-large product-icon"></i>
+                        </div>
+                        <div class="product-content">
+                            <h4 class="product-title">Vinyl Flooring</h4>
+                            <p class="product-description">Premium vinyl flooring solutions offering durability, style,
+                                and easy maintenance for commercial and residential applications.</p>
+                            <ul class="product-features">
+                                <li>Water resistant</li>
+                                <li>Wide design selection</li>
+                                <li>Easy to clean</li>
+                                <li>Cost-effective</li>
+                            </ul>
+                            <!-- <a href="contact.html" class="inquiry-btn">Request Quote</a> -->
+                        </div>
+                    </div>
+
+                    <div class="product-card" data-aos="fade-up" data-aos-delay="200">
+                        <div class="product-image">
+                            <i class="fas fa-tree product-icon"></i>
+                        </div>
+                        <div class="product-content">
+                            <h4 class="product-title">Wooden Flooring</h4>
+                            <p class="product-description">Elegant wooden flooring solutions including engineered
+                                hardwood, laminate, and solid wood options.</p>
+                            <ul class="product-features">
+                                <li>Natural wood aesthetics</li>
+                                <li>Various wood species</li>
+                                <li>Professional installation</li>
+                                <li>Long-term value</li>
+                            </ul>
+                            <!-- <a href="contact.html" class="inquiry-btn">Request Quote</a> -->
+                        </div>
+                    </div>
+
+                    <div class="product-card" data-aos="fade-up" data-aos-delay="300">
+                        <div class="product-image">
+                            <i class="fas fa-grip-horizontal product-icon"></i>
+                        </div>
+                        <div class="product-content">
+                            <h4 class="product-title">Rubber Flooring</h4>
+                            <p class="product-description">High-performance rubber flooring for gyms, hospitals,
+                                laboratories, and industrial applications.</p>
+                            <ul class="product-features">
+                                <li>Slip-resistant surface</li>
+                                <li>Chemical resistant</li>
+                                <li>Sound absorption</li>
+                                <li>Easy maintenance</li>
+                            </ul>
+                            <!-- <a href="contact.html" class="inquiry-btn">Request Quote</a> -->
+                        </div>
+                    </div>
+
+                    <div class="product-card" data-aos="fade-up" data-aos-delay="400">
+                        <div class="product-image">
+                            <i class="fas fa-border-style product-icon"></i>
+                        </div>
+                        <div class="product-content">
+                            <h4 class="product-title">Entrance Mats</h4>
+                            <p class="product-description">Professional entrance matting systems for commercial
+                                buildings, designed to trap dirt and moisture.</p>
+                            <ul class="product-features">
+                                <li>Dirt and moisture control</li>
+                                <li>Custom sizes available</li>
+                                <li>Heavy-duty construction</li>
+                                <li>Logo insertion options</li>
+                            </ul>
+                            <!-- <a href="contact.html" class="inquiry-btn">Request Quote</a> -->
+                        </div>
+                    </div>
+
+                    <div class="product-card" data-aos="fade-up" data-aos-delay="500">
+                        <div class="product-image">
+                            <i class="fas fa-th product-icon"></i>
+                        </div>
+                        <div class="product-content">
+                            <h4 class="product-title">Carpets</h4>
+                            <p class="product-description">Commercial and residential carpeting solutions with various
+                                textures, colors, and performance characteristics.</p>
+                            <ul class="product-features">
+                                <li>Stain resistant options</li>
+                                <li>Sound insulation</li>
+                                <li>Custom patterns</li>
+                                <li>Fire retardant materials</li>
+                            </ul>
+                            <!-- <a href="contact.html" class="inquiry-btn">Request Quote</a> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Doors & Security -->
+            <div class="category-section">
+                <h3 class="category-title" data-aos="fade-up">Doors & Security Systems</h3>
+                <div class="products-grid">
+                    <div class="product-card" data-aos="fade-up" data-aos-delay="100">
+                        <div class="product-image">
+                            <i class="fas fa-door-closed product-icon"></i>
+                        </div>
+                        <div class="product-content">
+                            <h4 class="product-title">Steel & Wooden Doors</h4>
+                            <p class="product-description">High-quality steel and wooden doors for commercial and
+                                residential applications with various security levels.</p>
+                            <ul class="product-features">
+                                <li>Fire-rated options</li>
+                                <li>Sound insulation</li>
+                                <li>Security features</li>
+                                <li>Custom designs</li>
+                            </ul>
+                            <!-- <a href="contact.html" class="inquiry-btn">Request Quote</a> -->
+                        </div>
+                    </div>
+
+                    <div class="product-card" data-aos="fade-up" data-aos-delay="200">
+                        <div class="product-image">
+                            <i class="fas fa-shield-alt product-icon"></i>
+                        </div>
+                        <div class="product-content">
+                            <h4 class="product-title">Ballistic & Bullet Proof Doors</h4>
+                            <p class="product-description">High-security ballistic doors for banks, government
+                                buildings, and high-risk facilities requiring maximum protection.</p>
+                            <ul class="product-features">
+                                <li>UL certified protection levels</li>
+                                <li>Custom fabrication</li>
+                                <li>Architectural finishes</li>
+                                <li>Professional installation</li>
+                            </ul>
+                            <!-- <a href="contact.html" class="inquiry-btn">Request Quote</a> -->
+                        </div>
+                    </div>
+
+                    <div class="product-card" data-aos="fade-up" data-aos-delay="300">
+                        <div class="product-image">
+                            <i class="fas fa-window-maximize product-icon"></i>
+                        </div>
+                        <div class="product-content">
+                            <h4 class="product-title">Fire Glazed Windows</h4>
+                            <p class="product-description">Fire-resistant glazed windows and curtain walls for buildings
+                                requiring fire compartmentalization.</p>
+                            <ul class="product-features">
+                                <li>Fire resistance ratings</li>
+                                <li>Thermal insulation</li>
+                                <li>Impact resistance</li>
+                                <li>Architectural aesthetics</li>
+                            </ul>
+                            <!-- <a href="contact.html" class="inquiry-btn">Request Quote</a> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Additional Civil Products -->
+            <div class="category-section">
+                <h3 class="category-title" data-aos="fade-up">Additional Civil & Finishing Products</h3>
+                <div class="products-grid">
+                    <div class="product-card" data-aos="fade-up" data-aos-delay="100">
+                        <div class="product-image">
+                            <i class="fas fa-utensils product-icon"></i>
+                        </div>
+                        <div class="product-content">
+                            <h4 class="product-title">Kitchen Cabinets</h4>
+                            <p class="product-description">Custom kitchen cabinetry solutions for residential and
+                                commercial kitchens with modern designs and functionality.</p>
+                            <ul class="product-features">
+                                <li>Custom dimensions</li>
+                                <li>Quality hardware</li>
+                                <li>Various finishes</li>
+                                <li>Soft-close mechanisms</li>
+                            </ul>
+                            <!-- <a href="contact.html" class="inquiry-btn">Request Quote</a> -->
+                        </div>
+                    </div>
+
+                    <div class="product-card" data-aos="fade-up" data-aos-delay="200">
+                        <div class="product-image">
+                            <i class="fas fa-couch product-icon"></i>
+                        </div>
+                        <div class="product-content">
+                            <h4 class="product-title">Project Furniture</h4>
+                            <p class="product-description">Commercial and office furniture solutions designed for modern
+                                workspaces and public areas.</p>
+                            <ul class="product-features">
+                                <li>Ergonomic designs</li>
+                                <li>Durable materials</li>
+                                <li>Modular systems</li>
+                                <li>Custom configurations</li>
+                            </ul>
+                            <!-- <a href="contact.html" class="inquiry-btn">Request Quote</a> -->
+                        </div>
+                    </div>
+
+                    <div class="product-card" data-aos="fade-up" data-aos-delay="300">
+                        <div class="product-image">
+                            <i class="fas fa-border-all product-icon"></i>
+                        </div>
+                        <div class="product-content">
+                            <h4 class="product-title">Partition Systems</h4>
+                            <p class="product-description">Flexible partition systems for offices, meeting rooms, and
+                                commercial spaces with acoustic and visual privacy.</p>
+                            <ul class="product-features">
+                                <li>Modular construction</li>
+                                <li>Sound insulation</li>
+                                <li>Glass and solid options</li>
+                                <li>Integrated services</li>
+                            </ul>
+                            <!-- <a href="contact.html" class="inquiry-btn">Request Quote</a> -->
+                        </div>
+                    </div>
+
+                    <div class="product-card" data-aos="fade-up" data-aos-delay="400">
+                        <div class="product-image">
+                            <i class="fas fa-grip-lines product-icon"></i>
+                        </div>
+                        <div class="product-content">
+                            <h4 class="product-title">Ceiling Systems</h4>
+                            <p class="product-description">Metal and acoustic ceiling systems providing aesthetic appeal
+                                and functional benefits for commercial spaces.</p>
+                            <ul class="product-features">
+                                <li>Acoustic performance</li>
+                                <li>Fire resistance</li>
+                                <li>Easy maintenance</li>
+                                <li>Integrated lighting</li>
+                            </ul>
+                            <!-- <a href="contact.html" class="inquiry-btn">Request Quote</a> -->
+                        </div>
+                    </div>
+
+                    <div class="product-card" data-aos="fade-up" data-aos-delay="500">
+                        <div class="product-image">
+                            <i class="fas fa-tint product-icon"></i>
+                        </div>
+                        <div class="product-content">
+                            <h4 class="product-title">Waterproofing Materials</h4>
+                            <p class="product-description">Comprehensive waterproofing solutions for basements, roofs,
+                                and building envelopes.</p>
+                            <ul class="product-features">
+                                <li>Membrane systems</li>
+                                <li>Liquid applied coatings</li>
+                                <li>Injection systems</li>
+                                <li>Long-term warranties</li>
+                            </ul>
+                            <!-- <a href="contact.html" class="inquiry-btn">Request Quote</a> -->
+                        </div>
+                    </div>
+
+                    <div class="product-card" data-aos="fade-up" data-aos-delay="600">
+                        <div class="product-image">
+                            <i class="fas fa-shield-virus product-icon"></i>
+                        </div>
+                        <div class="product-content">
+                            <h4 class="product-title">Insulation Materials</h4>
+                            <p class="product-description">Thermal and acoustic insulation materials for
+                                energy-efficient and comfortable building environments.</p>
+                            <ul class="product-features">
+                                <li>Thermal efficiency</li>
+                                <li>Sound dampening</li>
+                                <li>Fire resistance</li>
+                                <li>Environmental friendly</li>
+                            </ul>
+                            <!-- <a href="contact.html" class="inquiry-btn">Request Quote</a> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container" data-aos="fade-up">
+            <h2>Need Custom Solutions?</h2>
+            <p>Our team of experts can help you find the perfect civil and finishing products for your specific project
+                requirements.</p>
+            <!-- <a href="contact.html" class="cta-button">Contact Our Experts</a> -->
+        </div>
+    </section>
+
+
+    <!-- Contact Information Section -->
+    <section class="contact-info-section">
+        <div class="container" data-aos="fade-up">
+            <h2>Contact Us for Infrastructure Solutions</h2>
+            <p>Get in touch with our infrastructure specialists for expert consultation and product information</p>
+    
+            <div class="contact-grid">
+                <div class="contact-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="contact-icon">
+                        <i class="fas fa-phone"></i>
+                    </div>
+                    <h3>Phone</h3>
+                    <p>+968 91270101</p>
+                    <p>+968 96728207</p>
+                </div>
+    
+                <div class="contact-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="contact-icon">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <h3>Email</h3>
+                    <p>sales@dazpaint.com</p>
+                    <p>dazpaintsfinanace@gmail.com</p>
+                </div>
+    
+                <div class="contact-card" data-aos="fade-up" data-aos-delay="300">
+                    <div class="contact-icon">
+                        <i class="fas fa-map-marker-alt"></i>
+                    </div>
+                    <h3>Address</h3>
+                    <p>Maabilah Sanaya 4th NO. Street</p>
+                    <p>Postal Code 122, PO Box 491</p>
+                    <p>Muscat, Sultanate of Oman</p>
+                </div>
+            </div>
+    
+            <div class="contact-note">
+                <p><strong>Business Hours:</strong> Sunday - Thursday: 8:00 AM - 6:00 PM</p>
+                <p>We specialize in project-to-project supplies and prefer challenging items where consultants face
+                    sourcing issues or budget constraints.</p>
+            </div>
+        </div>
+    </section>
+    <section class="cta-section">
+        <div class="container" data-aos="fade-up">
+            <h2>Need Infrastructure Engineering Support?</h2>
+            <p>Our infrastructure specialists can help you design and specify the right products for your civil
+                engineering and public works projects.</p>
+            <a href="contact.html" class="cta-button">Consult Our Engineers</a>
+        </div>
+    </section>
+
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Daz Paints Coatings & Contracting Services. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script>
+        // Initialize AOS
+        AOS.init({
+            duration: 800,
+            easing: 'ease-in-out',
+            once: true
+        });
+
+        // Header scroll effect
+        window.addEventListener('scroll', function () {
+            const header = document.querySelector('.header');
+            if (window.scrollY > 100) {
+                header.style.background = 'rgba(255, 255, 255, 0.98)';
+                header.style.boxShadow = '0 2px 30px rgba(0,0,0,0.15)';
+            } else {
+                header.style.background = 'rgba(255, 255, 255, 0.95)';
+                header.style.boxShadow = '0 2px 20px rgba(0,0,0,0.1)';
+            }
+        });
+
+        // Mobile menu toggle
+        const mobileMenu = document.querySelector('.mobile-menu');
+        const navMenu = document.querySelector('.nav-menu');
+
+        mobileMenu.addEventListener('click', function () {
+            if (navMenu.style.display === 'flex') {
+                navMenu.style.display = 'none';
+            } else {
+                navMenu.style.display = 'flex';
+                navMenu.style.flexDirection = 'column';
+                navMenu.style.position = 'absolute';
+                navMenu.style.top = '100%';
+                navMenu.style.left = '0';
+                navMenu.style.right = '0';
+                navMenu.style.background = 'white';
+                navMenu.style.boxShadow = '0 4px 20px rgba(0,0,0,0.1)';
+                navMenu.style.padding = '1rem';
+            }
+        });
+    </script>
+</body>
+
+</html>

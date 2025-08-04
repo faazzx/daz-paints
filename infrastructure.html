@@ -1,0 +1,818 @@
+!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Infrastructure Products - DPCS</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #1a365d;
+            --secondary-color: #2b77ad;
+            --accent-color: #ffd700;
+            --text-dark: #2d3748;
+            --text-light: #718096;
+            --bg-light: #f7fafc;
+            --white: #ffffff;
+            --shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            --gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            overflow-x: hidden;
+        }
+
+        /* Header Styles */
+        .header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-link:hover {
+            color: var(--secondary-color);
+        }
+
+        .nav-link.active {
+            color: var(--secondary-color);
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent-color);
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after,
+        .nav-link.active::after {
+            width: 100%;
+        }
+
+        .mobile-menu {
+            display: none;
+            cursor: pointer;
+            font-size: 1.5rem;
+            color: var(--primary-color);
+        }
+
+        /* Page Header */
+        .page-header {
+            padding: 8rem 0 4rem 0;
+            background: linear-gradient(135deg, rgba(26, 54, 93, 0.9), rgba(43, 119, 173, 0.8)),
+                url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600"><rect fill="%23f0f0f0" width="1200" height="600"/><g fill="%23ddd"><rect x="100" y="200" width="200" height="20"/><rect x="400" y="150" width="300" height="15"/><rect x="800" y="250" width="150" height="25"/><circle cx="150" cy="100" r="20"/><circle cx="600" cy="350" r="15"/></g></svg>');
+            background-size: cover;
+            text-align: center;
+            color: var(--white);
+        }
+
+        .page-header h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .page-header p {
+            font-size: 1.3rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .breadcrumb {
+            margin-top: 2rem;
+            opacity: 0.8;
+        }
+
+        .breadcrumb a {
+            color: var(--white);
+            text-decoration: none;
+            margin: 0 0.5rem;
+        }
+
+        .breadcrumb a:hover {
+            color: var(--accent-color);
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Products Section */
+        .products-section {
+            padding: 5rem 0;
+            background: var(--bg-light);
+        }
+
+        .section-intro {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-intro h2 {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .section-intro p {
+            font-size: 1.2rem;
+            color: var(--text-light);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .product-card {
+            background: var(--white);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+        }
+
+        .product-image {
+            height: 200px;
+            background: var(--gradient);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .product-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, rgba(255, 255, 255, 0.1) 25%, transparent 25%, transparent 75%, rgba(255, 255, 255, 0.1) 75%);
+            background-size: 20px 20px;
+        }
+
+        .product-icon {
+            font-size: 4rem;
+            color: var(--white);
+            z-index: 2;
+            position: relative;
+        }
+
+        .product-content {
+            padding: 2rem;
+        }
+
+        .product-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .product-description {
+            color: var(--text-light);
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .product-features {
+            list-style: none;
+            margin-bottom: 2rem;
+        }
+
+        .product-features li {
+            padding: 0.5rem 0;
+            position: relative;
+            padding-left: 1.5rem;
+            color: var(--text-light);
+        }
+
+        .product-features li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--accent-color);
+            font-weight: 600;
+        }
+
+        .inquiry-btn {
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            background: var(--primary-color);
+            color: var(--white);
+            text-decoration: none;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .inquiry-btn:hover {
+            background: var(--secondary-color);
+            transform: translateX(5px);
+        }
+
+        /* Category Sections */
+        .category-section {
+            margin-bottom: 4rem;
+        }
+
+        .category-title {
+            font-size: 2rem;
+            color: var(--primary-color);
+            margin-bottom: 2rem;
+            text-align: center;
+            position: relative;
+        }
+
+        .category-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background: var(--accent-color);
+        }
+
+        /* Contact Information Section */
+        .contact-info-section {
+            padding: 5rem 0;
+            background: var(--white);
+        }
+
+        .contact-info-section h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .contact-info-section>.container>p {
+            text-align: center;
+            font-size: 1.2rem;
+            color: var(--text-light);
+            margin-bottom: 3rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .contact-card {
+            background: var(--bg-light);
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow);
+        }
+
+        .contact-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .contact-icon {
+            width: 60px;
+            height: 60px;
+            background: var(--primary-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem auto;
+            transition: all 0.3s ease;
+        }
+
+        .contact-card:hover .contact-icon {
+            background: var(--secondary-color);
+            transform: scale(1.1);
+        }
+
+        .contact-icon i {
+            font-size: 1.5rem;
+            color: var(--white);
+        }
+
+        .contact-card h3 {
+            font-size: 1.3rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .contact-card p {
+            color: var(--text-light);
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .contact-note {
+            background: var(--bg-light);
+            padding: 2rem;
+            border-radius: 10px;
+            text-align: center;
+            border-left: 4px solid var(--accent-color);
+        }
+
+        .contact-note p {
+            color: var(--text-light);
+            margin-bottom: 0.5rem;
+        }
+
+        .contact-note p:last-child {
+            margin-bottom: 0;
+        }
+
+        .contact-note strong {
+            color: var(--primary-color);
+        }
+
+        .cta-section {
+            padding: 4rem 0;
+            background: var(--gradient);
+            text-align: center;
+            color: var(--white);
+        }
+
+        .cta-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .cta-section p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background: var(--accent-color);
+            color: var(--primary-color);
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(255, 215, 0, 0.3);
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--primary-color);
+            color: var(--white);
+            text-align: center;
+            padding: 2rem 0;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .mobile-menu {
+                display: block;
+            }
+
+            .nav-menu {
+                display: none;
+            }
+
+            .page-header h1 {
+                font-size: 2.5rem;
+            }
+
+            .products-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav-container">
+            <a href="#" class="logo">DPCS</a>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <!-- <li><a href="about.html" class="nav-link">About</a></li> -->
+                <li><a href="contruction.html" class="nav-link">Civil & Finishing</a></li>
+                <li><a href="mep.html" class="nav-link">MEP</a></li>
+                <li><a href="infrastructure.html" class="nav-link">Infrastructure</a></li>
+                <!-- <li><a href="contact.html" class="nav-link">Contact</a></li> -->
+            </ul>
+            <div class="mobile-menu">
+                <i class="fas fa-bars"></i>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container" data-aos="fade-up">
+            <h1>Infrastructure Products</h1>
+            <p>Heavy-duty infrastructure solutions for roads, bridges, and public works projects</p>
+            <div class="breadcrumb">
+                <a href="index.html">Home</a> / <span>Infrastructure Products</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section class="products-section">
+        <div class="container">
+            <div class="section-intro" data-aos="fade-up">
+                <h2>Our Infrastructure Product Range</h2>
+                <p>Robust infrastructure solutions designed for demanding applications in civil engineering,
+                    transportation, and public infrastructure projects across the GCC region.</p>
+            </div>
+
+            <!-- Bridge & Structural Systems -->
+            <div class="category-section">
+                <h3 class="category-title" data-aos="fade-up">Bridge & Structural Systems</h3>
+                <div class="products-grid">
+                    <div class="product-card" data-aos="fade-up" data-aos-delay="100">
+                        <div class="product-image">
+                            <i class="fas fa-expand-arrows-alt product-icon"></i>
+                        </div>
+                        <div class="product-content">
+                            <h4 class="product-title">Infrastructure Expansion Joints</h4>
+                            <p class="product-description">Heavy-duty expansion joints designed specifically for
+                                bridges, highways, and large infrastructure projects to accommodate structural movement
+                                and thermal expansion.</p>
+                            <ul class="product-features">
+                                <li>High load capacity design</li>
+                                <li>Weather and chemical resistant</li>
+                                <li>Multiple movement capabilities</li>
+                                <li>Long service life</li>
+                            </ul>
+
+                        </div>
+                    </div>
+
+                    <div class="product-card" data-aos="fade-up" data-aos-delay="200">
+                        <div class="product-image">
+                            <i class="fas fa-compress-arrows-alt product-icon"></i>
+                        </div>
+                        <div class="product-content">
+                            <h4 class="product-title">Bridge Bearings</h4>
+                            <p class="product-description">Precision-engineered bridge bearings including elastomeric,
+                                pot, and spherical bearings for transferring loads and accommodating movements in bridge
+                                structures.</p>
+                            <ul class="product-features">
+                                <li>High load transfer capacity</li>
+                                <li>Multi-directional movement</li>
+                                <li>Seismic resistance</li>
+                                <li>Maintenance-free operation</li>
+                            </ul>
+                            <!-- <a href="contact.html" class="inquiry-btn">Request Quote</a>  -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Road Safety & Traffic Management -->
+            <div class="category-section">
+                <h3 class="category-title" data-aos="fade-up">Road Safety & Traffic Management</h3>
+                <div class="products-grid">
+                    <div class="product-card" data-aos="fade-up" data-aos-delay="100">
+                        <div class="product-image">
+                            <i class="fas fa-shield-alt product-icon"></i>
+                        </div>
+                        <div class="product-content">
+                            <h4 class="product-title">Guard Rails</h4>
+                            <p class="product-description">High-performance guard rail systems for highways, bridges,
+                                and roadways providing vehicle containment and redirecting capabilities for enhanced
+                                road safety.</p>
+                            <ul class="product-features">
+                                <li>Crash-tested designs</li>
+                                <li>Galvanized steel construction</li>
+                                <li>Easy installation system</li>
+                                <li>Low maintenance requirements</li>
+                            </ul>
+                            <!-- <a href="contact.html" class="inquiry-btn">Request Quote</a> -->
+                        </div>
+                    </div>
+
+                    <div class="product-card" data-aos="fade-up" data-aos-delay="200">
+                        <div class="product-image">
+                            <i class="fas fa-shield product-icon"></i>
+                        </div>
+                        <div class="product-content">
+                            <h4 class="product-title">Bollards</h4>
+                            <p class="product-description">Security and traffic management bollards for pedestrian
+                                areas, building perimeters, and vehicle access control applications.</p>
+                            <ul class="product-features">
+                                <li>Fixed and removable options</li>
+                                <li>Anti-ram security ratings</li>
+                                <li>Architectural finishes available</li>
+                                <li>LED lighting integration</li>
+                            </ul>
+                            <!-- <a href="contact.html" class="inquiry-btn">Request Quote</a> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Ground Reinforcement & Drainage -->
+            <div class="category-section">
+                <h3 class="category-title" data-aos="fade-up">Ground Reinforcement & Drainage</h3>
+                <div class="products-grid">
+                    <div class="product-card" data-aos="fade-up" data-aos-delay="100">
+                        <div class="product-image">
+                            <i class="fas fa-th product-icon"></i>
+                        </div>
+                        <div class="product-content">
+                            <h4 class="product-title">Geo Grids</h4>
+                            <p class="product-description">Advanced geosynthetic reinforcement solutions for soil
+                                stabilization, slope reinforcement, and pavement strengthening applications.</p>
+                            <ul class="product-features">
+                                <li>High tensile strength</li>
+                                <li>Chemical and UV resistant</li>
+                                <li>Easy installation process</li>
+                                <li>Cost-effective soil reinforcement</li>
+                            </ul>
+                            <!-- <a href="contact.html" class="inquiry-btn">Request Quote</a> -->
+                        </div>
+                    </div>
+
+                    <div class="product-card" data-aos="fade-up" data-aos-delay="200">
+                        <div class="product-image">
+                            <i class="fas fa-square product-icon"></i>
+                        </div>
+                        <div class="product-content">
+                            <h4 class="product-title">Infrastructure Cover Blocks</h4>
+                            <p class="product-description">Precast concrete cover blocks for utility access, drainage
+                                systems, and underground infrastructure protection in roadways and public areas.</p>
+                            <ul class="product-features">
+                                <li>Heavy-duty load ratings</li>
+                                <li>Precision-cast dimensions</li>
+                                <li>Theft-resistant designs</li>
+                                <li>Various size configurations</li>
+                            </ul>
+                            <!-- <a href="contact.html" class="inquiry-btn">Request Quote</a> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Additional Infrastructure Products -->
+            <div class="category-section">
+                <h3 class="category-title" data-aos="fade-up">Supporting Infrastructure Solutions</h3>
+                <div class="products-grid">
+                    <div class="product-card" data-aos="fade-up" data-aos-delay="100">
+                        <div class="product-image">
+                            <i class="fas fa-road product-icon"></i>
+                        </div>
+                        <div class="product-content">
+                            <h4 class="product-title">Highway Drainage Systems</h4>
+                            <p class="product-description">Complete highway and infrastructure drainage solutions
+                                including catch basins, culverts, and stormwater management systems.</p>
+                            <ul class="product-features">
+                                <li>High flow capacity designs</li>
+                                <li>Debris filtering systems</li>
+                                <li>Corrosion resistant materials</li>
+                                <li>Modular installation</li>
+                            </ul>
+                            <!-- <a href="contact.html" class="inquiry-btn">Request Quote</a> -->
+                        </div>
+                    </div>
+
+                    <div class="product-card" data-aos="fade-up" data-aos-delay="200">
+                        <div class="product-image">
+                            <i class="fas fa-traffic-light product-icon"></i>
+                        </div>
+                        <div class="product-content">
+                            <h4 class="product-title">Traffic Management Systems</h4>
+                            <p class="product-description">Comprehensive traffic control and management solutions
+                                including signs, signals, and intelligent transportation system components.</p>
+                            <ul class="product-features">
+                                <li>LED technology integration</li>
+                                <li>Smart traffic control</li>
+                                <li>Weather resistant designs</li>
+                                <li>Remote monitoring capability</li>
+                            </ul>
+                            <!-- <a href="contact.html" class="inquiry-btn">Request Quote</a> -->
+                        </div>
+                    </div>
+
+                    <div class="product-card" data-aos="fade-up" data-aos-delay="300">
+                        <div class="product-image">
+                            <i class="fas fa-mountain product-icon"></i>
+                        </div>
+                        <div class="product-content">
+                            <h4 class="product-title">Retaining Wall Systems</h4>
+                            <p class="product-description">Engineered retaining wall solutions for slope stabilization,
+                                erosion control, and landscape architectural applications.</p>
+                            <ul class="product-features">
+                                <li>Modular block systems</li>
+                                <li>Drainage integration</li>
+                                <li>Seismic design compliance</li>
+                                <li>Aesthetic finish options</li>
+                            </ul>
+                            <!-- <a href="contact.html" class="inquiry-btn">Request Quote</a> -->
+                        </div>
+                    </div>
+
+                    <div class="product-card" data-aos="fade-up" data-aos-delay="400">
+                        <div class="product-image">
+                            <i class="fas fa-layer-group product-icon"></i>
+                        </div>
+                        <div class="product-content">
+                            <h4 class="product-title">Pavement Reinforcement</h4>
+                            <p class="product-description">Advanced pavement reinforcement solutions including
+                                geocomposites, reinforcement fabrics, and crack prevention systems.</p>
+                            <ul class="product-features">
+                                <li>Extends pavement life</li>
+                                <li>Crack reflection prevention</li>
+                                <li>Easy application process</li>
+                                <li>Cost-effective maintenance</li>
+                            </ul>
+                            <!-- <a href="contact.html" class="inquiry-btn">Request Quote</a> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Information Section -->
+    <section class="contact-info-section">
+        <div class="container" data-aos="fade-up">
+            <h2>Contact Us for Infrastructure Solutions</h2>
+            <p>Get in touch with our infrastructure specialists for expert consultation and product information</p>
+
+            <div class="contact-grid">
+                <div class="contact-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="contact-icon">
+                        <i class="fas fa-phone"></i>
+                    </div>
+                    <h3>Phone</h3>
+                    <p>+968 91270101</p>
+                    <p>+968 96728207</p>
+                </div>
+
+                <div class="contact-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="contact-icon">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <h3>Email</h3>
+                    <p>sales@dazpaint.com</p>
+                    <p>dazpaintsfinanace@gmail.com</p>
+                </div>
+
+                <div class="contact-card" data-aos="fade-up" data-aos-delay="300">
+                    <div class="contact-icon">
+                        <i class="fas fa-map-marker-alt"></i>
+                    </div>
+                    <h3>Address</h3>
+                    <p>Maabilah Sanaya 4th NO. Street</p>
+                    <p>Postal Code 122, PO Box 491</p>
+                    <p>Muscat, Sultanate of Oman</p>
+                </div>
+            </div>
+
+            <div class="contact-note">
+                <p><strong>Business Hours:</strong> Sunday - Thursday: 8:00 AM - 6:00 PM</p>
+                <p>We specialize in project-to-project supplies and prefer challenging items where consultants face
+                    sourcing issues or budget constraints.</p>
+            </div>
+        </div>
+    </section>
+    <section class="cta-section">
+        <div class="container" data-aos="fade-up">
+            <h2>Need Infrastructure Engineering Support?</h2>
+            <p>Our infrastructure specialists can help you design and specify the right products for your civil
+                engineering and public works projects.</p>
+            <a href="contact.html" class="cta-button">Consult Our Engineers</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Daz Paints Coatings & Contracting Services. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script>
+        // Initialize AOS
+        AOS.init({
+            duration: 800,
+            easing: 'ease-in-out',
+            once: true
+        });
+
+        // Header scroll effect
+        window.addEventListener('scroll', function () {
+            const header = document.querySelector('.header');
+            if (window.scrollY > 100) {
+                header.style.background = 'rgba(255, 255, 255, 0.98)';
+                header.style.boxShadow = '0 2px 30px rgba(0,0,0,0.15)';
+            } else {
+                header.style.background = 'rgba(255, 255, 255, 0.95)';
+                header.style.boxShadow = '0 2px 20px rgba(0,0,0,0.1)';
+            }
+        });
+
+        // Mobile menu toggle
+        const mobileMenu = document.querySelector('.mobile-menu');
+        const navMenu = document.querySelector('.nav-menu');
+
+        mobileMenu.addEventListener('click', function () {
+            if (navMenu.style.display === 'flex') {
+                navMenu.style.display = 'none';
+            } else {
+                navMenu.style.display = 'flex';
+                navMenu.style.flexDirection = 'column';
+                navMenu.style.position = 'absolute';
+                navMenu.style.top = '100%';
+                navMenu.style.left = '0';
+                navMenu.style.right = '0';
+                navMenu.style.background = 'white';
+                navMenu.style.boxShadow = '0 4px 20px rgba(0,0,0,0.1)';
+                navMenu.style.padding = '1rem';
+            }
+        });
+    </script>
+</body>
+
+</html>
