@@ -1,0 +1,855 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - DPCS</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #1a365d;
+            --secondary-color: #2b77ad;
+            --accent-color: #ffd700;
+            --text-dark: #2d3748;
+            --text-light: #718096;
+            --bg-light: #f7fafc;
+            --white: #ffffff;
+            --shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            --gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            overflow-x: hidden;
+        }
+
+        /* Header Styles */
+
+
+        .brand-logo {
+    display: flex;
+    align-items: center;
+    font-size: 1.2rem;
+    font-weight: bold;
+    text-decoration: none;
+    color: black; /* Adjust to your theme */
+    white-space: nowrap; /* Prevents breaking into two lines */
+}
+
+.brand-logo-img {
+    height: 40px;   /* Adjust for navbar size */
+    width: auto;    /* Keep aspect ratio */
+    margin-right: 10px; /* Gap between logo and text */
+}
+        .header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-link:hover {
+            color: var(--secondary-color);
+        }
+
+        .nav-link.active {
+            color: var(--secondary-color);
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent-color);
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after,
+        .nav-link.active::after {
+            width: 100%;
+        }
+
+        .mobile-menu {
+            display: none;
+            cursor: pointer;
+            font-size: 1.5rem;
+            color: var(--primary-color);
+        }
+
+        /* Page Header */
+        .page-header {
+            padding: 8rem 0 4rem 0;
+            background: linear-gradient(135deg, rgba(26, 54, 93, 0.9), rgba(43, 119, 173, 0.8)),
+                url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600"><rect fill="%23f0f0f0" width="1200" height="600"/><g fill="%23ddd"><rect x="100" y="200" width="200" height="20"/><rect x="400" y="150" width="300" height="15"/><rect x="800" y="250" width="150" height="25"/><circle cx="150" cy="100" r="20"/><circle cx="600" cy="350" r="15"/></g></svg>');
+            background-size: cover;
+            text-align: center;
+            color: var(--white);
+        }
+
+        .page-header h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .page-header p {
+            font-size: 1.3rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .breadcrumb {
+            margin-top: 2rem;
+            opacity: 0.8;
+        }
+
+        .breadcrumb a {
+            color: var(--white);
+            text-decoration: none;
+            margin: 0 0.5rem;
+        }
+
+        .breadcrumb a:hover {
+            color: var(--accent-color);
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Contact Section */
+        .contact-section {
+            padding: 5rem 0;
+            background: var(--bg-light);
+        }
+
+        .section-intro {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-intro h2 {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .section-intro p {
+            font-size: 1.2rem;
+            color: var(--text-light);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .contact-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            margin-top: 4rem;
+        }
+
+        /* Contact Information */
+        .contact-info {
+            background: var(--white);
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+        }
+
+        .contact-info h3 {
+            font-size: 2rem;
+            color: var(--primary-color);
+            margin-bottom: 2rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 2rem;
+            padding: 1.5rem;
+            background: var(--bg-light);
+            border-radius: 15px;
+            transition: all 0.3s ease;
+        }
+
+        .contact-item:hover {
+            transform: translateX(10px);
+            box-shadow: var(--shadow);
+        }
+
+        .contact-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--primary-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 1.5rem;
+            flex-shrink: 0;
+        }
+
+        .contact-icon i {
+            font-size: 1.2rem;
+            color: var(--white);
+        }
+
+        .contact-details h4 {
+            font-size: 1.2rem;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .contact-details p {
+            color: var(--text-light);
+            margin-bottom: 0.3rem;
+        }
+
+        .contact-details a {
+            color: var(--text-light);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .contact-details a:hover {
+            color: var(--secondary-color);
+        }
+
+        /* Contact Form */
+        .contact-form {
+            background: var(--white);
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+        }
+
+        .contact-form h3 {
+            font-size: 2rem;
+            color: var(--primary-color);
+            margin-bottom: 2rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            color: var(--text-dark);
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            font-family: inherit;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--secondary-color);
+            box-shadow: 0 0 0 3px rgba(43, 119, 173, 0.1);
+        }
+
+        .form-group textarea {
+            height: 120px;
+            resize: vertical;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .submit-btn {
+            background: var(--primary-color);
+            color: var(--white);
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 25px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+
+        .submit-btn:hover {
+            background: var(--secondary-color);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow);
+        }
+
+        .submit-btn:disabled {
+            background: #cccccc;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        /* Business Info Section */
+        .business-info {
+            padding: 5rem 0;
+            background: var(--white);
+        }
+
+        .business-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .business-card {
+            background: var(--bg-light);
+            padding: 2.5rem;
+            border-radius: 15px;
+            text-align: center;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow);
+        }
+
+        .business-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .business-icon {
+            width: 70px;
+            height: 70px;
+            background: var(--gradient);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem auto;
+        }
+
+        .business-icon i {
+            font-size: 2rem;
+            color: var(--white);
+        }
+
+        .business-card h4 {
+            font-size: 1.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .business-card p {
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+
+        /* Map Section */
+        .map-section {
+            padding: 5rem 0;
+            background: var(--bg-light);
+        }
+
+        .map-container {
+            background: var(--white);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .map-placeholder {
+            text-align: center;
+            color: var(--text-light);
+            padding: 2rem;
+        }
+
+        .map-placeholder i {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            color: var(--secondary-color);
+        }
+
+        .map-placeholder h4 {
+            font-size: 1.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .map-placeholder p {
+            font-size: 1.1rem;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            padding: 4rem 0;
+            background: var(--gradient);
+            text-align: center;
+            color: var(--white);
+        }
+
+        .cta-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .cta-section p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .cta-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background: var(--accent-color);
+            color: var(--primary-color);
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(255, 215, 0, 0.3);
+        }
+
+        .cta-button.secondary {
+            background: transparent;
+            color: var(--white);
+            border: 2px solid var(--white);
+        }
+
+        .cta-button.secondary:hover {
+            background: var(--white);
+            color: var(--primary-color);
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--primary-color);
+            color: var(--white);
+            text-align: center;
+            padding: 2rem 0;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .mobile-menu {
+                display: block;
+            }
+
+            .nav-menu {
+                display: none;
+            }
+
+            .page-header h1 {
+                font-size: 2.5rem;
+            }
+
+            .contact-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .business-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav-container">
+            <a href="#" class="brand-logo">
+                <img src="logo.png" alt="Daz Paints Logo" class="brand-logo-img">
+                Daz Paints Coating & Contracting Services
+            </a>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="contruction.html" class="nav-link">Civil & Finishing</a></li>
+                <li><a href="mep.html" class="nav-link">MEP</a></li>
+                <li><a href="infrastructure.html" class="nav-link">Infrastructure</a></li>
+                <li><a href="paints.html" class="nav-link">Paints</a></li>
+                <li><a href="contact.html" class="nav-link">Contact Us</a></li>
+            </ul>
+            <div class="mobile-menu">
+                <i class="fas fa-bars"></i>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container" data-aos="fade-up">
+            <h1>Contact Us</h1>
+            <p>Get in touch with our team for expert consultation and project support</p>
+            <div class="breadcrumb">
+                <a href="index.html">Home</a> / <span>Contact</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact-section">
+        <div class="container">
+            <div class="section-intro" data-aos="fade-up">
+                <h2>Let's Discuss Your Project</h2>
+                <p>Whether you need construction materials, MEP solutions, infrastructure products, or paint systems,
+                    our expert team is here to help you find the right solutions for your project requirements.</p>
+            </div>
+
+            <div class="contact-content">
+                <!-- Contact Information -->
+                <div class="contact-info" data-aos="fade-right">
+                    <h3>Get In Touch</h3>
+
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-phone"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h4>Phone Numbers</h4>
+                            <p><a href="tel:+96891270101">+968 91270101</a></p>
+                            <p><a href="tel:+96896728207">+968 96728207</a></p>
+                        </div>
+                    </div>
+
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h4>Email Addresses</h4>
+                            <p><a href="mailto:sales@dazpaint.com">sales@dazpaint.com</a></p>
+                            <p><a href="mailto:dazpaintsfinanace@gmail.com">dazpaintsfinanace@gmail.com</a></p>
+                        </div>
+                    </div>
+
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h4>Office Address</h4>
+                            <p>Maabilah Sanaya 4th NO. Street</p>
+                            <p>Postal Code 122, PO Box 491</p>
+                            <p>Muscat, Sultanate of Oman</p>
+                        </div>
+                    </div>
+
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h4>Business Hours</h4>
+                            <p>Sunday - Thursday</p>
+                            <p>8:00 AM - 6:00 PM</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contact Form with Formspree Integration -->
+                <div class="contact-form" data-aos="fade-left">
+                    <h3>Send Us a Message</h3>
+                    <form id="contactForm" action="https://formspree.io/f/meozrolg" method="POST">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="firstName">First Name *</label>
+                                <input type="text" id="firstName" name="firstName" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="lastName">Last Name *</label>
+                                <input type="text" id="lastName" name="lastName" required>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="email">Email Address *</label>
+                                <input type="email" id="email" name="email" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="phone">Phone Number</label>
+                                <input type="tel" id="phone" name="phone">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="company">Company Name</label>
+                            <input type="text" id="company" name="company">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="service">Service Interest</label>
+                            <select id="service" name="service">
+                                <option value="">Select a service...</option>
+                                <option value="civil-finishing">Civil & Finishing</option>
+                                <option value="mep">MEP Solutions</option>
+                                <option value="infrastructure">Infrastructure Products</option>
+                                <option value="paints">Paint Systems</option>
+                                <option value="consultation">General Consultation</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="message">Message *</label>
+                            <textarea id="message" name="message"
+                                placeholder="Please describe your project requirements or inquiry..."
+                                required></textarea>
+                        </div>
+
+                        <button type="submit" class="submit-btn">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Business Info Section -->
+    <section class="business-info">
+        <div class="container">
+            <div class="business-grid">
+                <div class="business-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="business-icon">
+                        <i class="fas fa-handshake"></i>
+                    </div>
+                    <h4>Project Specialization</h4>
+                    <p>We specialize in project-to-project supplies and prefer challenging items where consultants face
+                        sourcing issues or budget constraints.</p>
+                </div>
+
+                <div class="business-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="business-icon">
+                        <i class="fas fa-globe-middle-east"></i>
+                    </div>
+                    <h4>GCC Region Expertise</h4>
+                    <p>Extensive experience serving the Gulf Cooperation Council region with products designed for harsh
+                        Middle Eastern climate conditions.</p>
+                </div>
+
+                <div class="business-card" data-aos="fade-up" data-aos-delay="300">
+                    <div class="business-icon">
+                        <i class="fas fa-tools"></i>
+                    </div>
+                    <h4>Technical Support</h4>
+                    <p>Our engineering team provides comprehensive technical support, product selection guidance, and
+                        installation assistance for all our solutions.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Map Section -->
+    <section class="map-section">
+        <div class="container" data-aos="fade-up">
+            <div class="section-intro">
+                <h2>Find Our Location</h2>
+                <p>Visit our office in Muscat for direct consultation and product demonstrations</p>
+            </div>
+            <div class="map-container">
+                <div class="map-placeholder">
+                    <i class="fas fa-map-marked-alt"></i>
+                    <h4>Maabilah Sanaya Office</h4>
+                    <p>Maabilah Sanaya 4th NO. Street<br>
+                        Postal Code 122, PO Box 491<br>
+                        Muscat, Sultanate of Oman</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container" data-aos="fade-up">
+            <h2>Ready to Start Your Project?</h2>
+            <p>Our team of experts is ready to help you find the perfect solutions for your construction and
+                infrastructure needs.</p>
+            <div class="cta-buttons">
+                <a href="tel:+96891270101" class="cta-button">Call Now</a>
+                <a href="mailto:sales@dazpaint.com" class="cta-button secondary">Email Us</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Daz Paints Coatings & Contracting Services. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script>
+        // Initialize AOS
+        AOS.init({
+            duration: 800,
+            easing: 'ease-in-out',
+            once: true
+        });
+
+        // Header scroll effect
+        window.addEventListener('scroll', function () {
+            const header = document.querySelector('.header');
+            if (window.scrollY > 100) {
+                header.style.background = 'rgba(255, 255, 255, 0.98)';
+                header.style.boxShadow = '0 2px 30px rgba(0,0,0,0.15)';
+            } else {
+                header.style.background = 'rgba(255, 255, 255, 0.95)';
+                header.style.boxShadow = '0 2px 20px rgba(0,0,0,0.1)';
+            }
+        });
+
+        // Mobile menu toggle
+        const mobileMenu = document.querySelector('.mobile-menu');
+        const navMenu = document.querySelector('.nav-menu');
+
+        mobileMenu.addEventListener('click', function () {
+            if (navMenu.style.display === 'flex') {
+                navMenu.style.display = 'none';
+            } else {
+                navMenu.style.display = 'flex';
+                navMenu.style.flexDirection = 'column';
+                navMenu.style.position = 'absolute';
+                navMenu.style.top = '100%';
+                navMenu.style.left = '0';
+                navMenu.style.right = '0';
+                navMenu.style.background = 'white';
+                navMenu.style.boxShadow = '0 4px 20px rgba(0,0,0,0.1)';
+                navMenu.style.padding = '1rem';
+            }
+        });
+
+        // Contact form handling with Formspree
+        document.getElementById('contactForm').addEventListener('submit', async function (e) {
+            e.preventDefault();
+
+            // Get form data
+            const formData = new FormData(this);
+            const submitButton = this.querySelector('button[type="submit"]');
+
+            // Simple form validation
+            if (!formData.get('firstName') || !formData.get('lastName') || !formData.get('email') || !formData.get('message')) {
+                alert('Please fill in all required fields.');
+                return;
+            }
+
+            // Disable the submit button to prevent multiple submissions
+            submitButton.disabled = true;
+            submitButton.textContent = 'Sending...';
+
+            try {
+                const response = await fetch(this.action, {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        'Accept': 'application/json'
+                    }
+                });
+
+                if (response.ok) {
+                    alert('Thank you for your message! We will get back to you soon.');
+                    this.reset();
+                } else {
+                    const errorData = await response.json();
+                    if (errorData.errors) {
+                        alert('There was a problem with your submission: ' + errorData.errors.map(error => error.message).join(', '));
+                    } else {
+                        alert('There was a problem submitting your form. Please try again later.');
+                    }
+                }
+            } catch (error) {
+                alert('There was a network error. Please check your connection and try again.');
+            } finally {
+                submitButton.disabled = false;
+                submitButton.textContent = 'Send Message';
+            }
+        });
+    </script>
+</body>
+
+</html>
