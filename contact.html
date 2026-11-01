@@ -355,6 +355,35 @@
             box-shadow: none;
         }
 
+        /* Inquiry button */
+        .inquiry-action {
+            text-align: center;
+            margin-top: 0.5rem;
+        }
+
+        .inquiry-action p {
+            color: var(--text-light);
+            margin-bottom: 1.25rem;
+        }
+
+        .inquiry-btn {
+            display: inline-block;
+            background: var(--primary-color);
+            color: var(--white);
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .inquiry-btn:hover {
+            background: var(--secondary-color);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow);
+        }
+
         /* Business Info Section */
         .business-info {
             padding: 5rem 0;
@@ -633,6 +662,12 @@
                             <p>Sunday - Thursday</p>
                             <p>8:00 AM - 6:00 PM</p>
                         </div>
+                    </div>
+
+                    <div class="inquiry-action">
+                        <p>Have a project or need a quote? Send us your inquiry by email.</p>
+                        <a href="mailto:sales@dazpaint.com?subject=Paint%20Inquiry%20%E2%80%94%20Daz%20Paints&amp;body=Hello%20Daz%20Paints%2C%0D%0A%0D%0AName%3A%20%0D%0ACompany%3A%20%0D%0APhone%3A%20%0D%0APaint%20type%20(decorative%2C%20protective%2C%20floor%2C%20marine)%3A%20%0D%0A%0D%0AInquiry%3A%20%0D%0A"
+                            class="inquiry-btn"><i class="fas fa-envelope"></i> Send Inquiry</a>
                     </div>
                 </div>
 
