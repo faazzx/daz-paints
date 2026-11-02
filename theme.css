@@ -1,0 +1,136 @@
+/* ==========================================================
+   DPCS — "Dark Luxury / Gulf Heritage" theme
+   Charcoal + antique gold on warm cream. Cormorant Garamond
+   headings, Manrope body. Sharp corners, hairline borders.
+   Loaded AFTER each page's inline <style>, so it wins.
+   ========================================================== */
+:root{
+  --ink:#14171B; --ink-2:#1E2227; --ink-3:#0F1114;
+  --gold:#C9A15C; --bronze:#7A5A1E;
+  --cream:#F4F1EC; --sand:#EAE5DC; --line:#E2DDD3;
+  --primary-color:#14171B;
+  --secondary-color:#7A5A1E;
+  --accent-color:#C9A15C;
+  --text-dark:#1A1D21;
+  --text-light:#4A4E55;
+  --bg-light:#F4F1EC;
+  --white:#FFFFFF;
+  --shadow:0 1px 0 rgba(20,23,27,.04);
+  --gradient:linear-gradient(135deg,#14171B 0%,#1E2227 100%);
+  --serif:'Cormorant Garamond',Georgia,serif;
+  --sans:'Manrope',system-ui,-apple-system,'Segoe UI',sans-serif;
+}
+body{font-family:var(--sans);background:var(--cream);color:var(--text-dark)}
+h1,h2,h3,.section-title,.category-card h3,.product-title,.category-title,.section-intro h2,
+.overview-text h2,.contact-info h3,.contact-form h3,.contact-card h3,.business-card h4,.cta-section h2,.contact-cta h2,.page-header h1{
+  font-family:var(--serif);font-weight:600;letter-spacing:-.005em}
+::selection{background:var(--gold);color:var(--ink)}
+
+/* ---------- Header ---------- */
+.header{background:var(--ink)!important;border-bottom:1px solid #2A2E34;box-shadow:none!important;backdrop-filter:none}
+.brand-logo{color:var(--cream)!important;gap:12px}
+.brand-logo-img{display:none}
+.dz-mark{display:block;flex:none}
+.dz-word{display:flex;flex-direction:column;line-height:1}
+.dz-word b{font-family:var(--serif);font-size:27px;font-weight:600;letter-spacing:.18em;color:var(--cream)}
+.dz-word i{display:flex;align-items:center;gap:6px;font-style:normal;font-size:9px;font-weight:600;letter-spacing:.3em;color:var(--gold);margin-top:4px;white-space:nowrap}
+.dz-word i::before,.dz-word i::after{content:"";width:10px;height:1px;background:var(--gold)}
+.nav-link{color:#D6D1C7!important;font-size:14px;font-weight:500}
+.nav-link:hover,.nav-link.active{color:var(--cream)!important;transform:none}
+.nav-link::after{background:var(--gold)!important;height:1px}
+.mobile-menu{color:var(--gold)!important}
+@media(max-width:768px){
+  .nav-menu{background:var(--ink)!important;border-top:1px solid #2A2E34}
+}
+
+/* ---------- Hero & page headers ---------- */
+.hero,.page-header{
+  background:
+    radial-gradient(900px 420px at 85% 0%,rgba(201,161,92,.10),transparent 60%),
+    var(--ink)!important;
+  color:var(--cream)}
+.hero h1,.page-header h1{text-shadow:none;font-weight:500;color:var(--cream)}
+.hero .tagline,.hero h1.tagline{font-style:italic;color:var(--gold)!important;font-weight:500}
+.page-header p,.hero .subtitle{color:#C9C4BA}
+.breadcrumb,.breadcrumb a{color:var(--gold)!important}
+.breadcrumb a:hover{color:var(--cream)!important}
+
+/* ---------- Buttons ---------- */
+.cta-button,.inquiry-btn,.learn-more,.submit-btn{
+  border-radius:0!important;box-shadow:none!important;font-weight:700;letter-spacing:.02em;transform:none!important}
+.cta-button{background:var(--gold)!important;color:var(--ink)!important;border:1px solid var(--gold)}
+.cta-button:hover{background:#D8B471!important;box-shadow:none!important}
+.cta-button.secondary{background:transparent!important;border:1px solid #5A5F66;color:var(--cream)!important}
+.cta-button.secondary:hover{border-color:var(--gold);color:var(--gold)!important}
+.learn-more,.inquiry-btn,.submit-btn{background:var(--ink)!important;color:var(--cream)!important;border:1px solid var(--ink)}
+.learn-more:hover,.inquiry-btn:hover,.submit-btn:hover{background:var(--gold)!important;border-color:var(--gold);color:var(--ink)!important}
+.submit-btn:disabled{background:#B9B3A8!important;border-color:#B9B3A8;color:#fff!important}
+
+/* ---------- Section rhythm ---------- */
+.categories,.products-section,.contact-section,.business-info,.map-section{background:var(--cream)!important}
+.overview,.category-section{background:var(--cream)!important}
+.section-title,.category-title{color:var(--ink)!important}
+.section-title::after,.category-title::after{background:var(--gold)!important;height:2px;width:56px}
+.section-intro h2{color:var(--ink)}
+.section-intro p{color:var(--text-light)}
+
+/* ---------- Cards ---------- */
+.category-card,.product-card,.contact-card,.business-card,.contact-form,.stat-item,.map-container{
+  border-radius:0!important;background:#fff!important;border:1px solid var(--line);box-shadow:none!important}
+.category-card,.product-card{border-top:3px solid var(--gold)}
+.category-card::before{display:none}
+.category-card:hover,.product-card:hover,.contact-card:hover,.business-card:hover,.stat-item:hover{
+  transform:none!important;border-color:var(--gold);box-shadow:0 14px 34px rgba(20,23,27,.10)!important}
+.category-icon,.business-icon i,.contact-icon i{color:var(--bronze)!important}
+.category-card:hover .category-icon{transform:none;color:var(--gold)!important}
+.stat-number{font-family:var(--serif);font-size:2.6rem;font-weight:600;color:var(--bronze)!important}
+.stat-label{letter-spacing:.1em;text-transform:uppercase;font-size:.75rem}
+
+/* product imagery tiles — paint-chip feel */
+.product-image{background:linear-gradient(135deg,var(--ink) 0%,var(--ink-2) 100%)!important;border-radius:0!important}
+.product-image::before{background:linear-gradient(45deg,rgba(201,161,92,.10) 25%,transparent 25%,transparent 75%,rgba(201,161,92,.10) 75%)!important;background-size:20px 20px}
+.product-icon{color:var(--gold)!important}
+.product-title{color:var(--ink)!important}
+.product-features li::before{color:var(--bronze)!important}
+
+/* contact icons / blocks */
+.contact-icon{background:var(--ink)!important;border-radius:0!important}
+.contact-icon i{color:var(--gold)!important}
+.contact-card:hover .contact-icon{background:var(--gold)!important}
+.contact-card:hover .contact-icon i{color:var(--ink)!important}
+.contact-item{border-radius:0!important}
+.contact-note{background:var(--sand)!important;border-left:3px solid var(--gold)!important;border-radius:0!important}
+.contact-note strong{color:var(--bronze)}
+.contact-details a{color:var(--bronze)}
+.contact-details a:hover{color:var(--ink)}
+
+/* forms */
+.form-group input,.form-group select,.form-group textarea{
+  border:1px solid #CFC8BA!important;border-radius:0!important;background:#fff;font-family:var(--sans)}
+.form-group input:focus,.form-group select:focus,.form-group textarea:focus{
+  border-color:var(--gold)!important;box-shadow:0 0 0 3px rgba(201,161,92,.22)!important;outline:none}
+.form-group label{color:var(--ink);font-weight:600}
+.map-placeholder{background:var(--sand)!important;border-radius:0!important}
+.map-placeholder i{color:var(--bronze)!important}
+
+/* ---------- Dark CTA bands ---------- */
+.contact-cta,.cta-section{background:var(--ink)!important;color:var(--cream)}
+.contact-cta h2,.cta-section h2{color:var(--cream)}
+.contact-cta p,.cta-section p{color:#C9C4BA;opacity:1}
+.contact-cta .contact-item i{color:var(--gold)!important}
+.contact-info-section{background:var(--ink-2)!important;color:var(--cream)}
+.contact-info-section h2{color:var(--cream)}
+.contact-info-section>.container>p{color:#C9C4BA}
+.contact-info-section .contact-card{background:transparent!important;border:1px solid #2E3339;border-top:3px solid var(--gold)}
+.contact-info-section .contact-card h3{color:var(--cream)}
+.contact-info-section .contact-card p{color:#C9C4BA}
+
+/* ---------- Footer ---------- */
+.footer{background:var(--ink-3)!important;color:#9C978E;font-size:13px;letter-spacing:.04em}
+.contact-info-section .contact-icon{background:transparent!important;border:1px solid var(--gold)}
+.contact-info-section .contact-card:hover .contact-icon{background:var(--gold)!important}
+.contact-info,.contact-form,.business-icon,.map-container,.map-placeholder,.contact-details,.form-group input,.form-group select,.form-group textarea{border-radius:0!important}
+.contact-info{background:#fff;border:1px solid var(--line);box-shadow:none!important}
+.business-icon{background:var(--ink)!important;border:1px solid var(--gold)}
+.business-icon i{color:var(--gold)!important}
+.contact-icon{border-radius:0!important}
